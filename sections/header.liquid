@@ -5,7 +5,7 @@
             <div class="flex justify-start lg:flex-1 truncate">
                 <h1 class="text-xl font-bold truncate">{{ shop.name }}</h1>
             </div>
-            <div class="-mr-2 my-2 ml-3 md:hidden">
+            <div class="-mr-2 -my-2 ml-3 md:hidden">
                 <button x-on:click="mobileMenuOpen = true" type="button" class="bg-white p-2 inline-flex items-center justify-center focus:outline-none">
                     {% render 'icon-menu' %}
                 </button>
@@ -72,14 +72,29 @@
             <!-- Mobile Menu Container--->
             <div x-show="mobileMenuOpen" class="absolute z-10 top-0 inset-x-0 p-2 transform origin-top-left md:hidden">
                 <div class="shadow-lg rounded-lg ring-1 ring-black ring-opacity-5 bg-white w-full">
-                    <div class="p-5 divide-y-5 divide-gray-50">
+                    <div class="p-5 divide-y-2 divide-gray-50">
                     <!--  MOBILE MENU HEADER TITLE PLUS CLOSE BUTTON--->
                     <div class="flex items-center justify-between pb-3">
-                        <div class="">
-                            <h1 class="text-lg text-gray-500">{{section.settings.mobile_menu_title}}</h1>
+                        <div>
+                            <h1 class="text-lg text-gray-500">{{ section.settings.mobile_menu_title }}</h1>
+                        </div>
+                        <div class="-mr-2">
+                            <button x-on:click="mobileMenuOpen = false" type="button" class="bg-white rounded-md p-2 text-gray-500">
+                                {% render 'icon-close' %}
+                            </button>
                         </div>
                     </div>
                     <!-- NAVIGATION LINKS FOR MOBILE MENU --->
+                    <div class="pt-3">
+                        <div class="grid gap-y-7">
+                        {% for link in section.settings.menu.links %}
+                            {% if link.links != blank %}
+                            {% else %}
+                                <a href="{{ link.url }}">{{ link.title }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -93,7 +108,9 @@
  "settings": [
     {
         "type": "text",
-        "id": "mobile_menu_title"
+        "id": "mobile_menu_title",
+        "default": "Menu",
+        "label": "Mobile Menu Title"
     },
      {
         "type": "link_list",
