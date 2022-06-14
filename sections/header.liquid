@@ -1,3 +1,9 @@
+{% if section.settings.menu.links == blank %}
+    {% assign main_menu_linklist = linklists[section.settings.menu].links %}
+{% else %}
+    {% assign main_menu_linklist = section.settings.menu.links %}
+{% endif %}
+
 <div class="relative bg-white" x-data="{mobileMenuOpen: false}">
     <div class="mx-auto px-4 sm:px-6">
         <div class="flex justify-center items-center py-6 md:justify-start md:space-x-10">
@@ -12,7 +18,7 @@
             </div>
                 {% comment %} Navigation Menu {% endcomment %}
                 <nav class="hidden md:flex space-x-10" >
-                    {% for link in section.settings.menu.links %}
+                    {% for link in main_menu_linklist %}
  
                         {% if link.links != blank %}
                             {% assign link_handle = link.handle | replace: '-', '_'%}
@@ -87,7 +93,7 @@
                     <!-- NAVIGATION LINKS FOR MOBILE MENU --->
                     <div class="pt-3">
                         <div class="grid gap-y-7">
-                        {% for link in section.settings.menu.links %}
+                        {% for link in main_menu_linklist %}
                             {% if link.links != blank %}
                                 {% assign mobile_link_handle = link.handle | replace: '-','_'%}
                                 <div class="relative" x-data="{ {{ mobile_link_handle }}: false}">
