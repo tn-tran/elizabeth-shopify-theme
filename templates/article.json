@@ -13,7 +13,7 @@
           "type": "article_published_date"
         },
         "thumbnail": { 
-          "type": "feature_image"
+          "type": "featured_image"
         },
         "content": { 
           "type": "article_content"

@@ -30,7 +30,7 @@
           </div>
         </div>
         
-      {% when 'feature_image' %}
+      {% when 'featured_image' %}
         <div itemprop="image" class="max-w-7xl bg-blue-100 rounded-lg mx-2 md:mx-auto overflow-hidden my-4">
           {% if article.image != blank %}
             <img class="w-full h-80 md:h-96 object-cover object-center" src="{{ article.image | img_url: 'large' }}"  alt="{{ article.image.alt }}" srcset="">
@@ -171,7 +171,7 @@
       "limit": 1
     },
     {
-      "type": "feature_image",
+      "type": "featured_image",
       "name": "Thumbnail",
       "limit": 1
     },
