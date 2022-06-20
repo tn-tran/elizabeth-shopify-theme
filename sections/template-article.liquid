@@ -1,4 +1,4 @@
-<article class="py-8">
+<article class="py-8" itemscope itemtype="https://schema.org/BlogPosting">
   {% for block in section.blocks %}
     {% case block.type %}
       {% when 'article_title'%}
@@ -7,16 +7,16 @@
             <a href="{{ blog.url }}" class="text-base uppercase text-gray-500 hover:text-gray-900 text-bold">
               {{blog.title }}
             </a>
-            <h1 class="text-4xl md:text-6xl font-medium">
+            <h1 itemprop="headline" class="text-4xl md:text-6xl font-medium">
             {{ article.title }}
             </h1>
           </div>
         </div>
       {% when 'article_author' %}
-        <div class="flex items-center justify-center">
+        <div class="flex items-center justify-center" itemscope itemtype="https://schema.org/Person">
           <div class="max-w-7xl text-center">
             {% if section.settings.enable_author %}
-              <small>{{ article.author }}</small>
+              <small itemprop="author">{{ article.author }}</small>
             {% endif %}  
           </div>
         </div>
@@ -25,13 +25,13 @@
         <div class="flex items-center justify-center">
           <div class="max-w-7xl text-center">
             {% if section.settings.enable_published_date %}
-              <time datetime="{{ article.published_at | date: '%y-%m-%d' }}">{{ article.published_at | date: format: 'on_date' }}</time>
+              <time datetime="{{ article.published_at | date: '%y-%m-%d' }}" itemprop="datePublished dateCreated">{{ article.published_at | date: format: 'on_date' }}</time>
             {% endif %}
           </div>
         </div>
         
       {% when 'feature_image' %}
-        <div class="max-w-7xl bg-blue-100 rounded-lg mx-2 md:mx-auto overflow-hidden my-4">
+        <div itemprop="image" class="max-w-7xl bg-blue-100 rounded-lg mx-2 md:mx-auto overflow-hidden my-4">
           {% if article.image != blank %}
             <img class="w-full h-80 md:h-96 object-cover object-center" src="{{ article.image | img_url: 'large' }}"  alt="{{ article.image.alt }}" srcset="">
           {% else %}
@@ -42,7 +42,7 @@
         
       {% when 'article_content' %}
         <div class="flex items-center justify-center">
-          <div class="max-w-4xl">
+          <div itemprop="articleBody"class="max-w-4xl">
             {{ article.content }}
           </div>
         </div>
